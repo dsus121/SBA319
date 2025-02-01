@@ -7,13 +7,16 @@ const path = require('path');
 const app = express();
 const routes = require('./routes');
 
+app.use(express.json());
+
 // middleware
 app.use('/', routes);
+// app.use('/', todoRoutes);
 
 //  more middleware, but for handling errors
 app.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack trace
-    res.status(500).send('Something went wrong!');
+    res.status(500).send('Sorry! The goats ate your homework.');
 });
 
 
