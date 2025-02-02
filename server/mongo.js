@@ -1,51 +1,34 @@
-// mongo.js - setting up the MongoDB connection
+// mongo.js - all the bits to connect to MongoDB
+const path = require('path');
 
-const { MongoClient } = require('mongodb');
+require('dotenv').config();
+const mongoose = require('mongoose');
 
-const uri = 'MONGODB_URI';
-const client = new MongoClient(uri);
-
-async function connectToMongoDB() {
-  try {
-    await client.connect();
-    console.log('Connected to MongoDB');
-    return client.db('trails_data');
-  } catch (error) {
-    console.error('Error connecting to MongoDB:', error);
-  }
-}
-
-connectToMongoDB().then(db => {
-  // Use the db object to interact with your database
-});
-
-async function storeDataInMongoDB(db, trails) {
-    try {
-      const collection = db.collection('trails');
-      await collection.insertMany(trails);
-      console.log('Data stored in MongoDB');
-    } catch (error) {
-      console.error('Error storing data:', error);
+const connectDB = async () => {
+    const mongoURI = process.env.MONGO_URI;
+    // console.log('Mongo_URI:', mongoURI);
+    if (!mongoURI) {
+        console.error('MongoDB connection error: MONGO_URI is undefined.');
+        process.exit(1);
     }
-  }
-  
-  // Example usage
-  connectToMongoDB().then(db => {
-    fetchData().then(data => { // calling the fetchData function
-      storeDataInMongoDB(db, data); // calling the storeDataInMongoDB function
-    });
-  });
-  
-  //////// dynamic Mongo code  ///////////
-//   const mongoose = require('mongoose');
+    try {
+        console.log('Attempting to connect to MongoDB...');
+        await mongoose.connect(mongoURI);
+        console.log('MongoDB connected');
+    } catch (error) {
+        console.error('MongoDB connection error:', error);
+        process.exit(1);
+    }
+};
 
-// const dynamicSchema = new mongoose.Schema({}, { strict: false });
+// process.exit is a method provided by Node.js that terminates the current process.
 
-// const getModel = (collectionName) => {
-//   return mongoose.model(collectionName, dynamicSchema, collectionName);
-// };
+// This method takes an optional argument, which is the exit code. The exit code is a number that is returned to the operating system when the process exits.
 
-// module.exports = getModel;
+// process.exit(0): This would terminate the process and indicate that it completed successfully.
 
-// make sure the line below is in the index.js
-// import { MongoClient } from 'mongodb';
+// process.exit(1): This would terminate the process and indicate that there was an error.
+
+
+
+module.exports = connectDB;

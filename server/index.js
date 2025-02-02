@@ -1,17 +1,33 @@
-// index.js - main server file
+// server/index.js - main server file
 
-require('dotenv').config();
+const path = require('path');
+
+// console.log('Before dotenv config:');
+// console.log(process.env.MONGO_URI); // pre - adding to figure out why the connection isn't working
+
+require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
+// console.log('After dotenv config:');
+// console.log(process.env.MONGO_URI); // post - adding to figure out why the connection isn't working
+
 const PORT = process.env.PORT || 3000;
 const express = require('express');
-const path = require('path');
-const app = express();
+const connectDB = require('./mongo');
 const routes = require('./routes');
 
-app.use(express.json());
+const app = express();
 
-// middleware
+// view engine
+app.set('view engine', 'ejs');
+app.set('views', path.join(__dirname, 'views'));
+
+// serve static files from the public folder
+app.use(express.static(path.join(__dirname, 'public'))); 
+
+// Middleware
+app.use(express.urlencoded({ extended: true }));
+
+// routes
 app.use('/', routes);
-// app.use('/', todoRoutes);
 
 //  more middleware, but for handling errors
 app.use((err, req, res, next) => {
@@ -19,12 +35,8 @@ app.use((err, req, res, next) => {
     res.status(500).send('Sorry! The goats ate your homework.');
 });
 
-
-// view engine
-app.set('view engine', 'ejs');
-
-// serve static files from the public folder
-app.use(express.static(path.join(__dirname, 'public'))); 
+// connect to MongoDB
+connectDB();
 
 // start the server
 app.listen(PORT, () => {

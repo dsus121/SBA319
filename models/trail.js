@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const trailSchema = new mongoose.Schema({
-    name: { type: String, required: true, index: true },
+    name: { type: String, required: true },
     surface: { type: String, required: true },
     type: { type: String, required: true },
     hiking: { type: Boolean, required: true },
@@ -20,7 +20,7 @@ const trailSchema = new mongoose.Schema({
     timestamps: { createdAt: 'INPUT_DATE', updatedAt: 'EDIT_DATE' }
 });
 
-// indexes for relevant fields
+// create indexes
 trailSchema.index({ name: 1 });
 trailSchema.index({ surface: 1 });
 trailSchema.index({ type: 1 });
@@ -36,5 +36,5 @@ trailSchema.index({ min_elevat: 1 });
 trailSchema.index({ max_elevat: 1 });
 trailSchema.index({ length_mi: 1 });
 
-const trail = mongoose.model('trail', trailSchema);
-module.exports = trail;
+const Trail = mongoose.model('Trail', trailSchema);
+module.exports = Trail;

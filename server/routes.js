@@ -1,24 +1,85 @@
-// routes.js - additional routes if necessary
+// server/routes.js - all the routes > user, trail, todo
 
 const express = require("express");
 const router = express.Router();
+const User = require('../models/user');
+const Todo = require('../models/todo');
+const Trail = require('../models/trail')
 
 // home route
-router.get("/", function (req, res) {
-  res.send("home page");
+router.get('/', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.render('index', { users });
+    } catch (err) {
+        console.error('Error fetching users:', err);
+        res.status(500).send('Server error');
+    }
 });
 
 // about route
-router.get("/about", function (req, res) {
-  res.send("about page");
+// router.get("/about", function (req, res) {
+//   res.send("about page");
+// });
+
+// read user data, wrap in a try/catch
+router.get('/users', async (req, res) => {
+    try {
+        const users = await User.find({});
+        res.send(users);
+    } catch (error) {
+        res.status(500).send(error);
+    }
 });
 
-const todo = require('../models/todo');
+// user route - display user-specific information
+router.get('/user/:id', async (req, res) => {
+    try {
+        const user = await User.findById(req.params.id);
+        res.render('user', { user });
+    } catch (err) {
+        console.error('Error fetching user:', err);
+        res.status(500).send('Server error');
+    }
+});
+
+// read trails data, wrap in a try/catch
+router.get('/trails', async (req, res) => {
+  try {
+      const trails = await Trail.find({});
+      res.send(trails);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+});
+
+// read specific user's data, wrap in a try/catch
+router.get('/trails/:id', async (req, res) => {
+  try {
+      const trail = await Trail.findById(req.params.id);
+      if (!trail) {
+          return res.status(404).send();
+      }
+      res.send(trail);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+});
+// begin CRUD functionality
+// READ todo data 
+router.get('/todos', async (req, res) => {
+  try {
+      const todos = await Todo.find({ user_id: req.query.user_id }).populate('trail_id');
+      res.send(todos);
+  } catch (error) {
+      res.status(500).send(error);
+  }
+});
 
 // CREATE a new to-do item (favorite a trail or add a planned hike)
 router.post('/todos', async (req, res) => {
     try {
-        const todo = new todo({
+        const todo = new Todo({
             user_id: req.body.user_id,
             trail_id: req.body.trail_id,
             planned_date: req.body.planned_date,
@@ -36,7 +97,7 @@ router.post('/todos', async (req, res) => {
 // READ all to-do items for a user
 router.get('/todos', async (req, res) => {
     try {
-        const todos = await todo.find({ user_id: req.query.user_id }).populate('trail_id');
+        const todos = await Todo.find({ user_id: req.query.user_id }).populate('trail_id');
         res.send(todos);
     } catch (error) {
         res.status(500).send(error);
@@ -46,7 +107,7 @@ router.get('/todos', async (req, res) => {
 // UPDATE a to-do item by ID
 router.patch('/todos/:id', async (req, res) => {
     try {
-        const todo = await todo.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
+        const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true });
         if (!todo) {
             return res.status(404).send();
         }
@@ -59,7 +120,7 @@ router.patch('/todos/:id', async (req, res) => {
 // DELETE a to-do item by ID
 router.delete('/todos/:id', async (req, res) => {
     try {
-        const todo = await todo.findByIdAndDelete(req.params.id);
+        const todo = await Todo.findByIdAndDelete(req.params.id);
         if (!todo) {
             return res.status(404).send();
         }
