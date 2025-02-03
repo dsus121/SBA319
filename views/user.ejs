@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= user.name %>'s Profile</title>
+    <link rel="stylesheet" href="/styles.css"> <!-- Link to the styles.css file -->
+</head>
+<body>
+    <h1><%= user.name %>'s Inventory</h1>
+    <ul>
+        <% user.packingList.forEach(item => { %>
+            <li><%= item %></li>
+        <% }) %>
+    </ul>
+
+    <h2>Select a Trail</h2>
+
+    <h3>Under 5 miles</h3>
+    <ul class="trailGroup" id="under5mi">
+        <% trails.filter(trail => trail.length < 5).forEach(trail => { %>
+            <li class="trailItem" data-value="<%= trail._id %>"><%= trail.name %> (<%= trail.length %> miles)</li>
+        <% }) %>
+    </ul>
+
+    <h3>5+ miles</h3>
+    <ul class="trailGroup" id="5plusmi">
+        <% trails.filter(trail => trail.length >= 5 && trail.length <= 10).forEach(trail => { %>
+            <li class="trailItem" data-value="<%= trail._id %>"><%= trail.name %> (<%= trail.length %> miles)</li>
+        <% }) %>
+    </ul>
+
+    <h3>Far</h3>
+    <ul class="trailGroup" id="far">
+        <% trails.filter(trail => trail.length > 10 && trail.length <= 20).forEach(trail => { %>
+            <li class="trailItem" data-value="<%= trail._id %>"><%= trail.name %> (<%= trail.length %> miles)</li>
+        <% }) %>
+    </ul>
+
+    <h3>Very Far</h3>
+    <ul class="trailGroup" id="veryfar">
+        <% trails.filter(trail => trail.length > 20).forEach(trail => { %>
+            <li class="trailItem" data-value="<%= trail._id %>"><%= trail.name %> (<%= trail.length %> miles)</li>
+        <% }) %>
+    </ul>
+
+    <h2>Trail Details</h2>
+    <div id="trailDetails" style="width: 80%;"></div>
+
+    <h2>Your Todos</h2>
+    <ul id="todosList">
+        <% todos.forEach(todo => { %>
+            <li>
+                <p>Trail: <%= todo.trail_id.name %></p>
+                <p>Planned Date: <%= todo.planned_date %></p>
+                <p>Notes: <%= todo.notes %></p>
+                <p>Checklist: <%= todo.checklist %></p>
+                <p>Favorite: <%= todo.favorite %></p>
+                <button onclick="editTodo('<%= todo._id %>')">Edit</button>
+                <button onclick="deleteTodo('<%= todo._id %>')">Delete</button>
+            </li>
+        <% }) %>
+    </ul>
+
+    <h2>Add a New Todo</h2>
+    <form id="addTodoForm" action="/todos" method="post">
+        <input type="hidden" name="user_id" value="<%= user._id %>">
+        <label for="trail_id">Trail:</label>
+        <select id="trail_id" name="trail_id">
+            <% trails.forEach(trail => { %>
+                <option value="<%= trail._id %>"><%= trail.name %></option>
+            <% }) %>
+        </select><br>
+        <label for="planned_date">Planned Date:</label>
+        <input type="date" id="planned_date" name="planned_date"><br>
+        <label for="notes">Notes:</label>
+        <textarea id="notes" name="notes"></textarea><br>
+        <label for="checklist">Checklist:</label>
+        <textarea id="checklist" name="checklist"></textarea><br>
+        <label for="favorite">Favorite:</label>
+        <input type="checkbox" id="favorite" name="favorite"><br>
+        <button type="submit">Add Todo</button>
+    </form>
+
+    <script>
+        document.querySelectorAll('.trailItem').forEach(item => {
+            item.addEventListener('click', function() {
+                const value = this.getAttribute('data-value');
+                fetch(`/trails/${value}`)
+                    .then(response => response.json())
+                    .then(trail => {
+                        const trailDetails = document.getElementById('trailDetails');
+                        trailDetails.innerHTML = ''; // Clear previous details
+                        if (trail) {
+                            const description = document.createElement('p');
+                            description.textContent = `Description: ${trail.description || 'No description available'}`;
+                            trailDetails.appendChild(description);
+                            // Add more details if needed
+                        }
+                    })
+                    .catch(error => console.error('Error fetching trail details:', error));
+            });
+        });
+
+        function editTodo(todoId) {
+            // Implement the edit todo functionality
+        }
+
+        function deleteTodo(todoId) {
+            fetch(`/todos/${todoId}`, {
+                method: 'DELETE',
+            })
+            .then(response => {
+                if (response.ok) {
+                    location.reload(); // Reload the page to reflect the changes
+                } else {
+                    console.error('Error deleting todo');
+                }
+            })
+            .catch(error => console.error('Error deleting todo:', error));
+        }
+    </script>
+</body>
+</html>

@@ -13,14 +13,17 @@ const connectDB = async () => {
     }
     try {
         console.log('Attempting to connect to MongoDB...');
-        await mongoose.connect(mongoURI);
-        console.log('MongoDB connected');
+        await mongoose.connect(mongoURI, {
+            dbName: 'hiking_app' // Specify the correct database name
+        });
+        console.log('MongoDB connected to hiking_app');
     } catch (error) {
         console.error('MongoDB connection error:', error);
         process.exit(1);
     }
 };
 
+module.exports = 
 // process.exit is a method provided by Node.js that terminates the current process.
 
 // This method takes an optional argument, which is the exit code. The exit code is a number that is returned to the operating system when the process exits.

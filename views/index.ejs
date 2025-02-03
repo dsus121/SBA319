@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Select User</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1>Let's Explore!</h1>
+    <form>
+        <label for="userSelect">Please select a user:</label>
+        <select id="userSelect" name="user">
+            <option value="" disabled selected>Select a user</option>
+            <% users.forEach(user => { %>
+                <option value="/user/<%= user._id %>"><%= user.name %></option>
+            <% }) %>
+        </select>
+    </form>
+
+    <script>
+        document.getElementById('userSelect').addEventListener('change', function() {
+            const userId = this.value;
+            window.location.href = userId;
+        });
+    </script>
+</body>
+</html>

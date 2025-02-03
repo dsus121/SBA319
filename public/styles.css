@@ -1,0 +1,106 @@
+/* import Google Font */
+@import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
+
+/* global styles */
+body {
+    font-family: 'Special Elite', cursive;
+    background-image: url('/images/paper.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    /* background-attachment: fixed; */
+
+    background-color: #fdf3e7;
+    color: #252525;
+    margin: 50px;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #2c2c2c;
+}
+
+ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+li {
+    padding: 5px 0;
+}
+
+form {
+    display: inline-block;
+    margin-top: 20px;
+}
+
+label, select {
+    font-size: 16px;
+    margin: 10px;
+}
+
+#trailForm {
+    margin: 20px 0;
+}
+
+#trailDetails {
+    margin-top: 20px;
+    padding: 10px;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    width: 80%;
+}
+
+/* Trail Group */
+.trailGroup {
+    list-style-type: none;
+    padding: 0;
+    margin: 10px 0;
+    width: 80%;
+}
+
+/* Trail Item */
+.trailItem {
+    font-family: 'Special Elite', cursive;
+    font-size: 16px;
+    color: #4d4d4d;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ccc;
+    border-radius: 5px;
+    padding: 10px;
+    margin-top: 5px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.trailItem:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+}
+
+/* Error Page Styles */
+body.error-page {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+    background-image: url('/images/404.jpg');
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
+body.error-page a {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+    padding: 10px;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 5px;
+    text-decoration: none;
+}
+
+body.error-page a:hover {
+    background: rgba(0, 0, 0, 0.7);
+}

@@ -52,3 +52,25 @@ https://liveferal.com/the-store/
 
 I finally got the data I wanted from here -> 
 https://data.colorado.gov/dataset/COTREX-Trails/ku77-733h/about_data
+
+
+_id:
+name:
+trail_num:
+surface:
+oneway:
+type:
+hiking:
+horse:
+bike:
+motorcycle:
+atv:
+dogs:
+min_elevat:
+1559.42907715
+max_elevat:
+1563.95263672
+length_mi_:
+0.4
+snowshoe:
+url:

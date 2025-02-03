@@ -17,11 +17,11 @@ const routes = require('./routes');
 const app = express();
 
 // view engine
+app.set('views', path.join(__dirname, '..', 'views'));
 app.set('view engine', 'ejs');
-app.set('views', path.join(__dirname, 'views'));
 
 // serve static files from the public folder
-app.use(express.static(path.join(__dirname, 'public'))); 
+app.use(express.static(path.join(__dirname, '..', 'public'))); 
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
@@ -29,10 +29,15 @@ app.use(express.urlencoded({ extended: true }));
 // routes
 app.use('/', routes);
 
+// handling 404 errors
+app.use((req, res, next) => {
+    res.status(404).render('404error'); 
+});
+
 //  more middleware, but for handling errors
 app.use((err, req, res, next) => {
     console.error(err.stack); // Log the error stack trace
-    res.status(500).send('Sorry! The goats ate your homework.');
+    res.status(500).send('Sorry! The goats ate everything!');
 });
 
 // connect to MongoDB
