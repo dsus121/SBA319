@@ -41,5 +41,5 @@ trailSchema.index({ length_mi_: 1 });
 trailSchema.index({ snowshoe: 1 });
 trailSchema.index({ url: 1 });
 
-const Trail = mongoose.model('Trail', trailSchema, 'trails_testing_data');
+const Trail = mongoose.model('Trail', trailSchema, 'trails_data');
 module.exports = Trail;

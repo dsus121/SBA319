@@ -75,6 +75,9 @@ form {
 /* styles.css */
 
 /* smaller buttons */
+/* styles.css */
+
+/* smaller buttons */
 .smallButton {
     font-family: 'Special Elite', cursive;
     font-size: 14px;
@@ -94,6 +97,33 @@ form {
 .smallButton:hover {
     background-color: rgba(200, 200, 200, 0.8);
 }
+
+/* todo form styling */
+.todoForm {
+    margin: 10px 0;
+}
+
+.todoLabel {
+    font-family: 'Special Elite', cursive;
+    font-size: 14px;
+    color: #4d4d4d;
+    margin: 5px 0;
+    display: block;
+}
+
+.todoInput {
+    font-family: 'Special Elite', cursive;
+    font-size: 14px;
+    color: #4d4d4d;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    width: 100%;
+    box-sizing: border-box;
+    margin: 5px 0 10px 0;
+}
+
 
 
 /* trail group */
