@@ -72,6 +72,9 @@ form {
 }
 
 /* smaller buttons */
+/* styles.css */
+
+/* smaller buttons */
 .smallButton {
     font-family: 'Special Elite', cursive;
     font-size: 14px;
@@ -83,11 +86,15 @@ form {
     cursor: pointer;
     box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
     text-align: center;
+    margin: 5px; /* Ensure consistent spacing */
+    display: inline-block; /* Ensure buttons are inline */
+    text-align: center; /* Center the text within the button */
 }
 
 .smallButton:hover {
     background-color: rgba(200, 200, 200, 0.8);
 }
+
 
 /* trail group */
 .trailGroup {

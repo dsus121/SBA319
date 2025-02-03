@@ -15,12 +15,26 @@
                     <p>Date Planned: <%= new Date(todo.planned_date).toLocaleDateString() %></p>
                     <p>Notes: <%= todo.notes || 'No notes' %></p>
                     <p>Checklist: <%= todo.checklist.length ? todo.checklist.join(', ') : 'No checklist items' %></p>
+                    <button class="smallButton" onclick="document.getElementById('editForm<%= todo._id %>').style.display='block'">Edit</button>
+                    <form id="editForm<%= todo._id %>" style="display:none" onsubmit="return updateTodo('<%= todo._id %>')">
+                        <label for="plannedDate<%= todo._id %>">Date Planned:</label>
+                        <input type="date" id="plannedDate<%= todo._id %>" value="<%= new Date(todo.planned_date).toISOString().split('T')[0] %>">
+                        <label for="notes<%= todo._id %>">Notes:</label>
+                        <input type="text" id="notes<%= todo._id %>" value="<%= todo.notes %>">
+                        <label for="checklist<%= todo._id %>">Checklist (comma separated):</label>
+                        <input type="text" id="checklist<%= todo._id %>" value="<%= todo.checklist.join(', ') %>">
+                        <button type="submit" class="smallButton">Save</button>
+                    </form>
+                    <button class="smallButton" onclick="deleteTodo('<%= todo._id %>')">Delete</button>
                 </li>
             <% }) %>
         </ul>
     <% } else { %>
         <p>Your to-do list is currently empty. Start planning a trail!</p>
     <% } %>
-    <button class="smallButton" onclick="location.href='/user/<%= user._id %>'">Go Back</button>
+    <div class="buttonContainer">
+        <button class="smallButton" onclick="location.href='/user/<%= user._id %>'">Go Back</button>
+    </div>
+    <script src="/js/indTodos.js"></script> <!-- Link to the JavaScript file -->
 </body>
 </html>

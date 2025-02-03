@@ -145,31 +145,39 @@ router.get("/todos", async (req, res) => {
 
 // UPDATE a to-do item by ID
 router.patch("/todos/:id", async (req, res) => {
-  try {
-    const todo = await Todo.findByIdAndUpdate(req.params.id, req.body, {
-      new: true,
-      runValidators: true,
-    });
-    if (!todo) {
-      return res.status(404).send();
+    try {
+      const { planned_date, notes, checklist } = req.body;
+      const todo = await Todo.findByIdAndUpdate(req.params.id, {
+        planned_date,
+        notes,
+        checklist: checklist.split(',').map(item => item.trim()), // Split and trim checklist items
+      }, { new: true });
+  
+      if (!todo) {
+        return res.status(404).json({ error: 'To-do item not found' });
+      }
+  
+      res.json(todo);
+    } catch (error) {
+      console.error('Error updating to-do:', error);
+      res.status(400).json({ error: 'Server error' });
     }
-    res.send(todo);
-  } catch (error) {
-    res.status(400).send(error);
-  }
-});
-
+  });
+  
 // DELETE a to-do item by ID
 router.delete("/todos/:id", async (req, res) => {
-  try {
-    const todo = await Todo.findByIdAndDelete(req.params.id);
-    if (!todo) {
-      return res.status(404).send();
+    try {
+      const todo = await Todo.findByIdAndDelete(req.params.id);
+  
+      if (!todo) {
+        return res.status(404).json({ error: 'To-do item not found' });
+      }
+  
+      res.json({ message: 'To-do item deleted successfully' });
+    } catch (error) {
+      console.error('Error deleting to-do:', error);
+      res.status(400).json({ error: 'Server error' });
     }
-    res.send(todo);
-  } catch (error) {
-    res.status(500).send(error);
-  }
-});
-
+  });
+  
 module.exports = router;
