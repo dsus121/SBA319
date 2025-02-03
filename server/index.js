@@ -13,7 +13,7 @@ const PORT = process.env.PORT || 3000;
 const express = require('express');
 const connectDB = require('./mongo');
 const routes = require('./routes');
-
+const bodyParser = require('body-parser');
 const app = express();
 
 // view engine
@@ -25,6 +25,9 @@ app.use(express.static(path.join(__dirname, '..', 'public')));
 
 // Middleware
 app.use(express.urlencoded({ extended: true }));
+app.use(bodyParser.json()); 
+app.use(bodyParser.urlencoded({ extended: true })); 
+
 
 // routes
 app.use('/', routes);

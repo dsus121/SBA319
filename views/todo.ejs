@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title><%= user.name %>'s To-Do List</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <h1><%= user.name %>'s To-Do List</h1>
+    <% if (todos.length > 0) { %>
+        <ul id="todoList">
+            <% todos.forEach(todo => { %>
+                <li>
+                    <h3>Trail Name: <%= todo.trail_id.name %></h3>
+                    <p>Date Planned: <%= new Date(todo.planned_date).toLocaleDateString() %></p>
+                    <p>Notes: <%= todo.notes || 'No notes' %></p>
+                    <p>Checklist: <%= todo.checklist.length ? todo.checklist.join(', ') : 'No checklist items' %></p>
+                </li>
+            <% }) %>
+        </ul>
+    <% } else { %>
+        <p>Your to-do list is currently empty. Start planning a trail!</p>
+    <% } %>
+    <button class="smallButton" onclick="location.href='/user/<%= user._id %>'">Go Back</button>
+</body>
+</html>

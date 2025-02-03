@@ -1,32 +1,29 @@
-/* import Google Font */
+/* import Google font */
 @import url('https://fonts.googleapis.com/css2?family=Special+Elite&display=swap');
 
-/* global styles */
+/* global Styles */
 body {
     font-family: 'Special Elite', cursive;
     background-image: url('/images/paper.jpg');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    /* background-attachment: fixed; */
-
     background-color: #fdf3e7;
     color: #252525;
     margin: 50px;
     padding: 20px;
 }
 
-h1, h2 {
-    color: #2c2c2c;
-}
-
+/* lists and forms */
 ul {
     list-style-type: none;
     padding: 0;
 }
 
-li {
+li, label, select {
     padding: 5px 0;
+    font-size: 16px;
+    margin: 10px;
 }
 
 form {
@@ -34,15 +31,11 @@ form {
     margin-top: 20px;
 }
 
-label, select {
-    font-size: 16px;
-    margin: 10px;
-}
-
 #trailForm {
     margin: 20px 0;
 }
 
+/* trail details */
 #trailDetails {
     margin-top: 20px;
     padding: 10px;
@@ -52,34 +45,68 @@ label, select {
     width: 80%;
 }
 
-/* Trail Group */
+/* Trail Grid and Buttons */
+.trailGrid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    width: 80%;
+    margin: 20px 0;
+}
+
+.trailButton, .trailItem, .userItem {
+    font-family: 'Special Elite', cursive;
+    font-size: 16px;
+    color: #4d4d4d;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 10px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.trailButton:hover, .trailItem:hover, .userItem:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+}
+
+/* smaller buttons */
+.smallButton {
+    font-family: 'Special Elite', cursive;
+    font-size: 14px;
+    color: #4d4d4d;
+    background-color: rgba(255, 255, 255, 0.8);
+    border: 2px solid #ccc;
+    border-radius: 10px;
+    padding: 8px;
+    cursor: pointer;
+    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+    text-align: center;
+}
+
+.smallButton:hover {
+    background-color: rgba(200, 200, 200, 0.8);
+}
+
+/* trail group */
 .trailGroup {
+    display: none; /* initially hide all groups */
     list-style-type: none;
     padding: 0;
     margin: 10px 0;
     width: 80%;
 }
 
-/* Trail Item */
-.trailItem {
-    font-family: 'Special Elite', cursive;
-    font-size: 16px;
-    color: #4d4d4d;
-    background-color: rgba(255, 255, 255, 0.8);
-    border: 2px solid #ccc;
-    border-radius: 5px;
-    padding: 10px;
-    margin-top: 5px;
-    cursor: pointer;
-    box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-    text-align: center;
+/* users grid */
+.userGrid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
 
-.trailItem:hover {
-    background-color: rgba(200, 200, 200, 0.8);
-}
-
-/* Error Page Styles */
+/* error page styles */
 body.error-page {
     display: flex;
     justify-content: center;
@@ -103,4 +130,16 @@ body.error-page a {
 
 body.error-page a:hover {
     background: rgba(0, 0, 0, 0.7);
+}
+
+/* ensure links in user items do not get underlined */
+.userItem a {
+    text-decoration: none; /* remove underline from links */
+    color: inherit; /* inherit color from parent element */
+    display: block; /* make the link fill the user item */
+}
+
+.userItem a:hover {
+    text-decoration: none; /* no underline on hover */
+    color: inherit; /* inherit color from parent element */
 }
