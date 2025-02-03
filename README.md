@@ -3,57 +3,65 @@
 
 ## ascii tree diagram
 
-This project does this ... [populate]
+This project is a model of a simple todo list. The trails data comes from the state's COTREX dataset. It was quite the adventure finding the correct pathway to get this data. I did keep notes, so buzz me if you need the .csv. Because there is A LOT of data, my application is running a little slowly. Please be patient. You'll see 42 users on the landing page. Just choose someone to see their inventory. Then you can see trail details and choose trail to add to their to-do list. You can edit the date, notes, and checklist fields ... or delete a planned hike.
+
+CRUD operations on the to-do list acheived.
 
 ## ascii tree diagram
 
-SBA319/
+`SBA319/
 ┣ models/
 ┃ ┣ todo.js
 ┃ ┣ trail.js
 ┃ ┗ user.js
 ┣ public/
 ┃ ┣ images/
-┃ ┣ index.html
+┃ ┃ ┣ 404.jpg
+┃ ┃ ┗ paper.jpg
+┃ ┣ js/
+┃ ┃ ┣ getTrailDetails.js
+┃ ┃ ┗ indTodos.js
 ┃ ┣ script.js
 ┃ ┗ styles.css
 ┣ server/
 ┃ ┣ data/
 ┃ ┃ ┗ data.js
-┃ ┣ views/
-┃ ┃ ┣ index.ejs
-┃ ┃ ┗ user.ejs
 ┃ ┣ index.js
 ┃ ┣ mongo.js
 ┃ ┣ populateData.js
 ┃ ┣ populatePackingLists.js
 ┃ ┗ routes.js
+┣ views/
+┃ ┣ 404error.ejs
+┃ ┣ index.ejs
+┃ ┣ todo.ejs
+┃ ┗ user.ejs
 ┣ .env
 ┣ .gitignore
 ┣ NOTES.txt
 ┣ package-lock.json
 ┣ package.json
-┗ README.md
+┗ README.md`
 
 ## Technical Requirements
 
-- [ ] Use at least three different data collections within the database (such as users, posts, or comments). (**5%**)
-- [ ] Utilize reasonable data modeling practices. (**10%**)
-- [ ] Create GET routes for all data that should be exposed to the client, using appropriate query commands to retrieve the data from the database. (**10%**)
-- [ ] Create POST routes for data, as appropriate, using appropriate insertion commands to add data to the database. At least one data collection should allow for client creation via a POST request. (**10%**)
-- [ ] Create PATCH or PUT routes for data, as appropriate, using appropriate update commands to change data in the database. At least one data collection should allow for client manipulation via a PATCH or PUT request. (**10%**)
-- [ ] Create DELETE routes for data, as appropriate, using appropriate delete commands to remove data from the database. At least one data collection should allow for client deletion via a DELETE request. (**10%**)
+- [X] Use at least three different data collections within the database (such as users, posts, or comments). (**5%**)
+- [X] Utilize reasonable data modeling practices. (**10%**)
+- [X] Create GET routes for all data that should be exposed to the client, using appropriate query commands to retrieve the data from the database. (**10%**)
+- [X] Create POST routes for data, as appropriate, using appropriate insertion commands to add data to the database. At least one data collection should allow for client creation via a POST request. (**10%**)
+- [X] Create PATCH or PUT routes for data, as appropriate, using appropriate update commands to change data in the database. At least one data collection should allow for client manipulation via a PATCH or PUT request. (**10%**)
+- [X] Create DELETE routes for data, as appropriate, using appropriate delete commands to remove data from the database. At least one data collection should allow for client deletion via a DELETE request. (**10%**)
 - [ ] Include sensible indexes for any and all fields that are queried frequently. For fields that may have a high write-to-read ratio, you may forgo indexes for performance considerations. Make comments of this where applicable. (**5%**)
 - [ ] Include sensible MongoDB data validation rules for at least one data collection. (**5%**) [schema]
   - Note: This may be accomplished in a number of ways. If you choose to perform this task outside of your application's code, you must include a way to test the validation within the application's routes. This can be as simple as providing a POST route that attempts to create an invalid document and displays the resulting error.
-- [ ] Populate your application's collections with sample data illustrating the use case of the collections. You must include at least five sample documents per collection.  (**5%**)
+- [X] Populate your application's collections with sample data illustrating the use case of the collections. You must include at least five sample documents per collection.  (**5%**)
 Note: **Double-check this requirement before submission.** Testing your delete routes may leave you under the requirement. To be safe, populate your collections with sample data well above the requirement (we recommend 10-20 documents). (**5%**)
-- [ ] Utilize reasonable code organization practices.  (**5%**)
-- [ ] Ensure that the program runs without errors (comment out things that do not work, and explain your blockers - you can still receive partial credit).  (**10%**)
-- [ ] Commit frequently to the git repository. [ at least 10] (**5%**)
-- [ ] Include a README file that contains a description of your application.
+- [X] Utilize reasonable code organization practices.  (**5%**)
+- [X] Ensure that the program runs without errors (comment out things that do not work, and explain your blockers - you can still receive partial credit).  (**10%**)
+- [X] Commit frequently to the git repository. [ at least 10] (**5%**)
+- [X] Include a README file that contains a description of your application.
 This README must include a description of your API's available routes and their corresponding CRUD operations for reference.  (**5%**)
-- [ ] Level of effort displayed in creativity and user experience.  (**5%**)
+- [X] Level of effort displayed in creativity and user experience.  (**5%**)
 
 
 ## Bonus Objectives
@@ -66,13 +74,18 @@ Note: The validation requirements above must still be implemented database-side,
 
 ### Reflection (Optional)
 Once you have completed your project, answer the following questions to help solidify your understanding of the process and its outcomes, as well as improve your ability to handle similar tasks in the future.
-What could you have done differently during the planning stages of your project to make the execution easier?
+
+What could you have done differently during the planning stages of your project to make the execution easier? 
+- I would have accounted for the overall complexity of my project aim. I did not intend for this to be sp sprawling ... but sprawling it is.
+
 
 Were there any requirements that were difficult to implement? What do you think would make them easier to implement in future projects?
 
 What would you add to or change about your application if given more time?
+- I would make add CRUD operations to the inventory list.
 
 Use this space to make notes for your future self about anything that you think is important to remember about this process, or that may aid you when attempting something similar again:
+- Dawn, Dawn, Dawn, Dawn, Dawn. Please just focus one one functionality at a time, then push it. You take too much of the cake in one bite.
 
 ## from the assignment page . . . . . . . . 
 
