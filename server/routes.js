@@ -5,6 +5,18 @@ const router = express.Router();
 const User = require("../models/user");
 const Trail = require("../models/trail");
 const Todo = require("../models/todo");
+const allTodos = require("./allTodos")
+
+// read all to-do items
+router.get("/alltodos", async (req, res) => {
+  try {
+    const todos = await Todo.find().populate("trail_id").lean();
+    res.json(todos);
+  } catch (error) {
+    console.error("Error fetching todos:", error);
+    res.status(500).json({ error: "server error" });
+  }
+});
 
 // home route - populates the dropdown to select a user
 router.get("/", async (req, res) => {
@@ -16,11 +28,6 @@ router.get("/", async (req, res) => {
     res.status(500).send("Server error");
   }
 });
-
-// about route
-// router.get("/about", function (req, res) {
-//   res.send("about page");
-// });
 
 // read user data, wrap in a try/catch
 router.get("/user/:id", async (req, res) => {
@@ -51,6 +58,19 @@ router.get("/user/:id", async (req, res) => {
   } catch (err) {
     console.error("error fetching user or trails:", err);
     res.status(500).send("server error");
+  }
+});
+
+
+// Route to fetch and display all data from trail_testing_data
+router.get('/trail_testing_data', async (req, res) => {
+  try {
+    const data = await getTrailTestingData();
+    console.log('Trail Testing Data:', data); // Log the data
+    res.render('trail_testing_data', { data });
+  } catch (error) {
+    console.error('Error fetching trail testing data:', error);
+    res.status(500).send('Internal Server Error');
   }
 });
 
@@ -92,10 +112,11 @@ router.get("/user/:id/todos", async (req, res) => {
     }
     res.render("todo", { user, todos });
   } catch (error) {
-    console.error("error fetching todos:", error);
+    console.error("Error fetching todos:", error);
     res.status(500).json({ error: "server error" });
   }
 });
+
 
 // create a new to-do item (plan a trail)
 router.post("/todos", async (req, res) => {
@@ -131,14 +152,14 @@ router.post("/todos", async (req, res) => {
   }
 });
 
-// READ all to-do items for a user
+// READ all to-do items for all users
 router.get("/todos", async (req, res) => {
   try {
-    const todos = await Todo.find({ user_id: req.query.user_id }).populate(
-      "trail_id"
-    );
-    res.send(todos);
+    const todos = await Todo.find({ user_id: req.query.user_id }).populate("trail_id");
+    console.log('Todos:', todos); // log the fetched todos
+    res.json(todos);
   } catch (error) {
+    console.error('Error fetching todos:', error);
     res.status(500).send(error);
   }
 });

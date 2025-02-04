@@ -1,51 +1,165 @@
+9:45a 2/3
+getting a mild error when selecting the "go back" button 
+- from a user's inventory todo.ejs page
+- back to their user.ejs page
+- getTrailDetails.js:94 error fetching to-dos: 
+  SyntaxError: Unexpected token '<', "<!DOCTYPE "... is not valid JSON
+
+12:58p 
+can't select more than one trail to add to the todos, 
+have to go forward or back and reload the user.ejs page
+
+http://localhost:6800/user/679fbcf0736d4c6c4eb48f6a/todos
+=========================
+validation w mongoose example ---
+         const User = mongoose.model('User', userSchema);
+         const newUser = new User({ name: 'John', email: 'john.doe@example.com', age: 30 });
+
+         newUser.validate((err) => {
+         if (err) {
+            console.error('Validation failed:', err);
+         } else {
+            console.log('Validation succeeded');
+         }
+         });
+=============================
+
+### MongoDB Data Validation Rules
+
+1. **Set Up Validation Rules in MongoDB:**
+   - MongoDB provides schema validation capabilities that allow you to enforce rules at the database level. For example, you can use a JSON schema to define the required structure of your documents.
+   - These rules can be defined when creating a collection or updated later.
+
+   ```json
+   {
+     "$jsonSchema": {
+       "bsonType": "object",
+       "required": ["name", "age"],
+       "properties": {
+         "name": {
+           "bsonType": "string",
+           "description": "must be a string and is required"
+         },
+         "age": {
+           "bsonType": "int",
+           "minimum": 18,
+           "description": "must be an integer and at least 18"
+         }
+       }
+     }
+   }
+   ```
+
+2. **Implement Validation in Mongoose Schema:**
+   - Mongoose provides a robust way to add validation to your application's code. This ensures data is validated both client-side (in your application) and database-side (MongoDB).
+
+   ```javascript
+   const mongoose = require('mongoose');
+
+   const userSchema = new mongoose.Schema({
+     name: {
+       type: String,
+       required: [true, 'Name is required'],
+       minlength: [3, 'Name must be at least 3 characters long']
+     },
+     age: {
+       type: Number,
+       required: [true, 'Age is required'],
+       min: [18, 'Age must be at least 18']
+     }
+   });
+
+   const User = mongoose.model('User', userSchema);
+   ```
+
+### Testing Validation via Routes
+
+1. **Set Up a POST Route to Test Validation:**
+   - Create a POST route in your application to test the validation rules. This route will attempt to create an invalid document and display the resulting error.
+
+   ```javascript
+   const express = require('express');
+   const mongoose = require('mongoose');
+   const User = require('./models/user'); // Assuming user.js contains the User model
+   const app = express();
+
+   app.use(express.json());
+
+   // POST route to test validation
+   app.post('/test-validation', async (req, res) => {
+     try {
+       const user = new User(req.body);
+       await user.save();
+       res.status(201).send(user);
+     } catch (error) {
+       res.status(400).send(error.message);
+     }
+   });
+
+   // Start the server
+   mongoose.connect('mongodb://localhost:27017/testdb', { useNewUrlParser: true, useUnifiedTopology: true })
+     .then(() => app.listen(3000, () => console.log('Server is running on port 3000')))
+     .catch(err => console.error(err));
+   ```
+
+2. **Test the Validation:**
+   - Use a tool like Postman or cURL to send a POST request to your `/test-validation` route with invalid data. For example:
+
+   ```json
+   {
+     "name": "Jo",
+     "age": 17
+   }
+   ```
+
+   - The response should display an error message indicating that the validation failed.
+
+
+
+---------------------------------------------------------------
 Users -
-
-"The Hobbit" and TLOTR by J.R.R. Tolkien
-   - Bilbo Baggins
-   - Gandalf
-   - Thorin Oakenshield
-        - Kili
-        - Fili
-        - Balin
-        - Dwalin
-        - Oin
-        - Gloin
-        - Dori
-        - Nori
-        - Ori
-        - Bifur
-        - Bofur
-        - Bombur
-   - Frodo Baggins
-   - Samwise Gamgee
-   - Aragorn
-   - Legolas
-   - Gimli
-   - Boromir
-   - Meridoc Brandybuck
-   - Perigrin Took
-   - Smeagol
-
-Rand al'Thor
-Mat Cauthon
-Perrin Aybara
-Egwene al'Vere
-Nynaeve al'Meara
-Lan Mandragoran
-Moiraine Sedai
-Thom Merrilin
-Aviendha
-Elayne Trakand
-Loial, the Ogier
-
-   - Walter Mitty 
-   - Buck
-   - Shadow
-   - Sassy
-   - Chance
-
-
-
+1. Bilbo Baggins
+2. Gandalf
+3. Thorin Oakenshield
+4. Kili
+5. Fili
+6. Balin
+7. Dwalin
+8. Oin
+9. Gloin
+10. Dori
+11. Nori
+12. Ori
+13. Bifur
+14. Bofur
+15. Bombur
+16. Frodo Baggins
+17. Samwise Gamgee
+18. Aragorn
+19. Eowyn
+20. Galadriel
+21. Legolas
+22. Gimli
+23. Boromir
+24. Meridoc Brandybuck
+25. Perigrin Took
+26. Smeagol
+27. Rand al'Thor
+28. Mat Cauthon
+29. Perrin Aybara
+30. Egwene al'Vere
+31. Nynaeve al'Meara
+32. Lan Mandragoran
+33. Moiraine Sedai
+34. Thom Merrilin
+35. Aviendha
+36. Elayne Trakand
+37. Loial, the Ogier
+38. Walter Mitty
+39. Buck
+40. Shadow
+41. Sassy
+42. Chance
 
 
 https://liveferal.com/the-store/
@@ -74,3 +188,21 @@ length_mi_:
 0.4
 snowshoe:
 url:
+
+Colorado 4corner coordinates
+
+Northwest Corner:
+Latitude: 41.0039° N
+Longitude: 109.0489° W
+
+Northeast Corner:
+Latitude: 41.0039° N
+Longitude: 102.0522° W
+
+Southwest Corner:
+Latitude: 36.9927° N
+Longitude: 109.0404° W
+
+Southeast Corner:
+Latitude: 36.9927° N
+Longitude: 102.0522° W

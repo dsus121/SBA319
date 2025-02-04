@@ -1,3 +1,7 @@
+// public/js/indTodos.js
+// I wanted to keep the todo functionality separate from the routes
+//   and server logic
+
 function updateTodo(todoId) {
     const plannedDate = document.getElementById(`plannedDate${todoId}`).value;
     const notes = document.getElementById(`notes${todoId}`).value;
@@ -25,7 +29,7 @@ function updateTodo(todoId) {
     })
     .catch(error => console.error('Error updating to-do:', error));
 
-    return false; // Prevent default form submission
+    return false; // prevents default form submission
 }
 
 function deleteTodo(todoId) {
@@ -45,7 +49,7 @@ function deleteTodo(todoId) {
     })
     .then(deletedTodo => {
         console.log('Deleted to-do:', deletedTodo);
-        location.reload(); // Reload the page to show updated to-do list
+        location.reload(); // reload the page to show updated to-do list
     })
     .catch(error => console.error('Error deleting to-do:', error));
 }

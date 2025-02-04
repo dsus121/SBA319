@@ -1,4 +1,5 @@
 // populateData.js - will call manually to populate user data
+// only used this at the beginning of the project
 
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });

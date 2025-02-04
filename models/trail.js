@@ -13,7 +13,7 @@ const trailSchema = new mongoose.Schema({
     bike: { type: Boolean, required: true },
     motorcycle: { type: Boolean, required: true },
     atv: { type: Boolean, required: true },
-    dogs: { type: String, required: true }, // Assuming 'leashed' is a string value
+    dogs: { type: String, required: true }, // "yes", "leashed", or empty
     min_elevat: { type: Number, required: true },
     max_elevat: { type: Number, required: true },
     length_mi_: { type: Number, required: true },
@@ -41,5 +41,5 @@ trailSchema.index({ length_mi_: 1 });
 trailSchema.index({ snowshoe: 1 });
 trailSchema.index({ url: 1 });
 
-const Trail = mongoose.model('Trail', trailSchema, 'trails_data');
+const Trail = mongoose.model('Trail', trailSchema, 'trails_testing_data');
 module.exports = Trail;

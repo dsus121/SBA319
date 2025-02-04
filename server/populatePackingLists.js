@@ -1,3 +1,7 @@
+// server/populatePackingLists.js - set up each user's inventory
+// based on race and gender
+// used only once in the beginning to populate inventories
+
 const path = require('path');
 require('dotenv').config({ path: path.join(__dirname, '..', '.env') });
 const mongoose = require('mongoose');
