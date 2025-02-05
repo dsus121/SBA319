@@ -92,16 +92,15 @@ These bonus objectives cannot increase your overall score above 100%. Successful
 Note: The validation requirements above must still be implemented database-side, but should also be implemented application-side within your Mongoose schema(s). **+1%**	
 
 ### Reflection (Optional)
-Once you have completed your project, answer the following questions to help solidify your understanding of the process and its outcomes, as well as improve your ability to handle similar tasks in the future.
 
-What could you have done differently during the planning stages of your project to make the execution easier? 
-- I would have accounted for the overall complexity of my project aim. I did not intend for this to be sp sprawling ... but sprawling it is.
+#### What could you have done differently during the planning stages of your project to make the execution easier? 
+- I would have accounted for the overall complexity of my project aim. I did not intend for this to be so sprawling ... but sprawling it is.
 
+#### Were there any requirements that were difficult to implement? What do you think would make them easier to implement in future projects?
+- Understanding 'schema' was easy enough, and the concept of indexing was reasonable ... implementations was trickier. So the schema only control outputs? <- still working on understanding it all.
+  
+#### What would you add to or change about your application if given more time?
+- I would make add CRUD operations to the inventory list. I would also add an escape back to the root. Adding maps would be AMAZING.
 
-Were there any requirements that were difficult to implement? What do you think would make them easier to implement in future projects?
-
-What would you add to or change about your application if given more time?
-- I would make add CRUD operations to the inventory list.
-
-Use this space to make notes for your future self about anything that you think is important to remember about this process, or that may aid you when attempting something similar again:
-- Dawn, Dawn, Dawn, Dawn, Dawn. Please just focus one one functionality at a time, then push it. You take too much of the cake in one bite.
+#### Use this space to make notes for your future self about anything that you think is important to remember about this process, or that may aid you when attempting something similar again:
+- Dawn, Dawn, Dawn, Dawn, Dawn. Please just focus one one functionality at a time, then push it. You eat too much of the cake in one bite.
